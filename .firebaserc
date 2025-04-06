@@ -1,7 +1,7 @@
 {
   "projects": {
-    "dev": "dbms-demo-fe",
-    "default": "dbms-demo-fe"
+    "dev": "mdp-fe",
+    "default": "mdp-fe"
   },
   "targets": {},
   "etags": {}
