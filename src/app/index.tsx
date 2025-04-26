@@ -8,9 +8,9 @@ import {
   ToastContainer,
 } from 'react-toastify';
 
-// import { GOOGLE_OAUTH_CLIENT_ID } from '@/config/env';
 // import handleAxiosError from '@/helpers/handle-axios-error';
 import { routeTree } from '@/routeTree.gen';
+import { useAuthStore } from '@/stores';
 // import { logger } from '@/utils/logger';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -31,17 +31,17 @@ declare module '@tanstack/react-router' {
 }
 
 const AppRouter = () => {
-  // const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
   return (
     <RouterProvider
       router={router}
-      // context={{ authContext: { isAuthenticated } }}
+      context={{ authContext: { isAuthenticated } }}
     />
   );
 };
 
 const App = () => {
-  // const { isAuthenticated, setIsAuthenticated } = useAuthStore();
+  // const { isAuthenticated } = useAuthStore();
   // const { setUser } = useUserStore();
   // const { setGlobalLoading } = useGlobalLoadingStore();
 
