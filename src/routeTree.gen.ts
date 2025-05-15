@@ -12,10 +12,10 @@
 
 import { Route as rootRoute } from './features/~__root';
 import { Route as IndexImport } from './features/~index';
-import { Route as Feature1IdImport } from './features/~feature1/~$id';
+import { Route as UsersIdImport } from './features/~users/~$id';
+import { Route as UsersIndexImport } from './features/~users/~index';
 import { Route as LoginIndexImport } from './features/~login/~index';
 import { Route as HomeIndexImport } from './features/~home/~index';
-import { Route as Feature1IndexImport } from './features/~feature1/~index';
 
 // Create/Update Routes
 
@@ -25,9 +25,15 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any);
 
-const Feature1IdRoute = Feature1IdImport.update({
-  id: '/feature1/$id',
-  path: '/feature1/$id',
+const UsersIdRoute = UsersIdImport.update({
+  id: '/users/$id',
+  path: '/users/$id',
+  getParentRoute: () => rootRoute,
+} as any);
+
+const UsersIndexRoute = UsersIndexImport.update({
+  id: '/users/',
+  path: '/users/',
   getParentRoute: () => rootRoute,
 } as any);
 
@@ -43,12 +49,6 @@ const HomeIndexRoute = HomeIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any);
 
-const Feature1IndexRoute = Feature1IndexImport.update({
-  id: '/feature1/',
-  path: '/feature1/',
-  getParentRoute: () => rootRoute,
-} as any);
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -58,13 +58,6 @@ declare module '@tanstack/react-router' {
       path: '/';
       fullPath: '/';
       preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
-    '/feature1/': {
-      id: '/feature1/';
-      path: '/feature1';
-      fullPath: '/feature1';
-      preLoaderRoute: typeof Feature1IndexImport;
       parentRoute: typeof rootRoute;
     };
     '/home/': {
@@ -81,11 +74,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginIndexImport;
       parentRoute: typeof rootRoute;
     };
-    '/feature1/$id': {
-      id: '/feature1/$id';
-      path: '/feature1/$id';
-      fullPath: '/feature1/$id';
-      preLoaderRoute: typeof Feature1IdImport;
+    '/users/': {
+      id: '/users/';
+      path: '/users';
+      fullPath: '/users';
+      preLoaderRoute: typeof UsersIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/users/$id': {
+      id: '/users/$id';
+      path: '/users/$id';
+      fullPath: '/users/$id';
+      preLoaderRoute: typeof UsersIdImport;
       parentRoute: typeof rootRoute;
     };
   }
@@ -95,52 +95,52 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute;
-  '/feature1': typeof Feature1IndexRoute;
   '/home': typeof HomeIndexRoute;
   '/login': typeof LoginIndexRoute;
-  '/feature1/$id': typeof Feature1IdRoute;
+  '/users': typeof UsersIndexRoute;
+  '/users/$id': typeof UsersIdRoute;
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute;
-  '/feature1': typeof Feature1IndexRoute;
   '/home': typeof HomeIndexRoute;
   '/login': typeof LoginIndexRoute;
-  '/feature1/$id': typeof Feature1IdRoute;
+  '/users': typeof UsersIndexRoute;
+  '/users/$id': typeof UsersIdRoute;
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute;
   '/': typeof IndexRoute;
-  '/feature1/': typeof Feature1IndexRoute;
   '/home/': typeof HomeIndexRoute;
   '/login/': typeof LoginIndexRoute;
-  '/feature1/$id': typeof Feature1IdRoute;
+  '/users/': typeof UsersIndexRoute;
+  '/users/$id': typeof UsersIdRoute;
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/feature1' | '/home' | '/login' | '/feature1/$id';
+  fullPaths: '/' | '/home' | '/login' | '/users' | '/users/$id';
   fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/feature1' | '/home' | '/login' | '/feature1/$id';
-  id: '__root__' | '/' | '/feature1/' | '/home/' | '/login/' | '/feature1/$id';
+  to: '/' | '/home' | '/login' | '/users' | '/users/$id';
+  id: '__root__' | '/' | '/home/' | '/login/' | '/users/' | '/users/$id';
   fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
-  Feature1IndexRoute: typeof Feature1IndexRoute;
   HomeIndexRoute: typeof HomeIndexRoute;
   LoginIndexRoute: typeof LoginIndexRoute;
-  Feature1IdRoute: typeof Feature1IdRoute;
+  UsersIndexRoute: typeof UsersIndexRoute;
+  UsersIdRoute: typeof UsersIdRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  Feature1IndexRoute: Feature1IndexRoute,
   HomeIndexRoute: HomeIndexRoute,
   LoginIndexRoute: LoginIndexRoute,
-  Feature1IdRoute: Feature1IdRoute,
+  UsersIndexRoute: UsersIndexRoute,
+  UsersIdRoute: UsersIdRoute,
 };
 
 export const routeTree = rootRoute
@@ -154,17 +154,14 @@ export const routeTree = rootRoute
       "filePath": "~__root.tsx",
       "children": [
         "/",
-        "/feature1/",
         "/home/",
         "/login/",
-        "/feature1/$id"
+        "/users/",
+        "/users/$id"
       ]
     },
     "/": {
       "filePath": "~index.tsx"
-    },
-    "/feature1/": {
-      "filePath": "~feature1/~index.tsx"
     },
     "/home/": {
       "filePath": "~home/~index.tsx"
@@ -172,8 +169,11 @@ export const routeTree = rootRoute
     "/login/": {
       "filePath": "~login/~index.tsx"
     },
-    "/feature1/$id": {
-      "filePath": "~feature1/~$id.tsx"
+    "/users/": {
+      "filePath": "~users/~index.tsx"
+    },
+    "/users/$id": {
+      "filePath": "~users/~$id.tsx"
     }
   }
 }

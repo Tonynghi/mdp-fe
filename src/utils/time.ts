@@ -9,4 +9,15 @@ function haveSameDate(
   return date1.format('MM DD YYYY') === date2.format('MM DD YYYY');
 }
 
-export { haveSameDate };
+function getTimeDiff(_date1: dayjs.ConfigType, _date2: dayjs.ConfigType) {
+  const format = 'HH:mm:ss';
+  const start = dayjs(_date1, format);
+  const end = dayjs(_date2, format);
+
+  // Calculate the difference
+  const diff = end.diff(start);
+
+  return diff;
+}
+
+export { haveSameDate, getTimeDiff };

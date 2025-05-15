@@ -49,12 +49,7 @@ function RouteComponent() {
   });
 
   return (
-    <PageContainer contentCenter>
-      <img
-        alt="login background"
-        src="/images/login-background.png"
-        className="w-full h-full absolute z-0 bg-cover bg-center"
-      />
+    <PageContainer contentCenter background="/images/login-background.png">
       <Card className="p-6 flex w-[30rem] z-1">
         <Box
           component="form"
